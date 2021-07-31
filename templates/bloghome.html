@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block css %}
+<style>
+      .container{
+          min-height: 50vh;
+      }
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container">
+<h1 class="my-3">Welcome to Mountain Coders Blog</h1>
+{% for blog in blogs %}
+
+
+<div class="my-2">
+
+    <h3><a href="/blogpost/{{blog.slug}}" class="text-dark">{{blog.title}}</a></h3>
+    <div class="my-3">
+    {{blog.short_desc|slice:245}}...
+    </div>
+    <a href="/blogpost/{{blog.slug}}" class="text-dark"><button class="btn btn-primary">Read more</button></a>
+
+</div>
+<br>
+{% endfor %}
+
+<div class="my-3 d-flex justify-content-between">
+{% if prev %}
+<button class="btn btn-primary"><a class="text-light" href="/blog?page={{prev}}">&laquo; Previous</a></button>
+{% else %}
+<button class="btn btn-primary"><a class="text-light" href="#">&laquo; Previous</a></button>
+{% endif %}
+
+{% if nxt %}
+<button class="btn btn-primary"><a class="text-light" href="/blog?page={{nxt}}"> Next &raquo;</a></button>
+{% else %}
+<button class="btn btn-primary"><a class="text-light" href="#"> Next &raquo;</a></button>
+{% endif %}
+
+</div>
+</div>
+{% endblock body %}
